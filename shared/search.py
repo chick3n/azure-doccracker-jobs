@@ -6,28 +6,24 @@ from azure.search.documents import SearchClient
 from azure.core.credentials import AzureKeyCredential
 
 class Search:
-    def __init__(self, index, primary_key_name):
+    def __init__(self, index):
         self.key = os.environ['Search_Key']
         self.endpoint = os.environ['Search_Endpoint']
-        self.primary_key_name = primary_key_name
         self.index = index
 
     def __get_search_client(self):
         return SearchClient(self.endpoint, self.index, AzureKeyCredential(self.key))
 
-    def get_document_texts(self, documents:List[str]) -> List[str]:
+    def get_document_texts(self, documents:List[str], field:str='content') -> List[str]:
         texts = []
-        for document in documents:
-            text = self.get_document_text(document)
-            if text:
-                texts.append(text)
+        for document_id in documents:
+            document = self.get_document_text(document_id)
+            if document and field in document:
+                texts.append(document[field])
 
         return texts
 
-    def get_document_text(self, record_id:str) -> Optional[str]:
+    def get_document(self, record_id:str) -> Optional[str]:
         client = self.__get_search_client()
-        result = client.get_document(key=record_id)
-        if result:
-            return result['content']
-        return None
+        return client.get_document(key=record_id)
         

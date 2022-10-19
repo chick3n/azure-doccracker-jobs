@@ -25,6 +25,15 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "preLaunchTask": "BuildSamples"
+    },
+    {
+      "name": "Python: Sample Queue",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/samples/sample_queue.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "preLaunchTask": "BuildSamples"
     }
   ]
 }

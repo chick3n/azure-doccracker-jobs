@@ -10,10 +10,7 @@
     },
     {
       "label": "BuildSamples",
-        "dependsOn": [
-            "pip install (functions)",
-            "pip install (samples)"
-        ]
+      "dependsOn": "pip install (samples)"
     },
     {
       "label": "pip install (functions)",
@@ -41,6 +38,7 @@
       "linux": {
         "command": "${config:azureFunctions.pythonVenv}/bin/python -m pip install -r ./samples/requirements.txt"
       },
+      "dependsOn": "pip install (functions)",
       "problemMatcher": []
     }
   ]
