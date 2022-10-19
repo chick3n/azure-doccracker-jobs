@@ -26,10 +26,10 @@ def get_sample_job(database: Database) -> Job:
 def update_state(database: Database):
     print('\n\nupdate_state')
     job = Job.from_entity(get_sample_entity(database))
-    entity = database.update_job_state(job.index_name, job.id, JobState.Completed)
+    entity = database.update_job_state(job.index, job.id, JobState.Completed)
     print(f'updated {entity.PartitionKey}/{entity.RowKey} state to {entity.State}')
     print(f'update state back to {job.state}')
-    entity = database.update_job_state(job.index_name, job.id, job.state)
+    entity = database.update_job_state(job.index, job.id, job.state)
     print(f'updated {entity.PartitionKey}/{entity.RowKey} state to {entity.State}')
 
 

@@ -14,7 +14,17 @@
       "request": "launch",
       "program": "${workspaceFolder}/samples/sample_db.py",
       "console": "integratedTerminal",
-      "justMyCode": true
+      "justMyCode": true,
+      "preLaunchTask": "BuildSamples"
+    },
+    {
+      "name": "Python: Sample Search",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/samples/sample_search.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "preLaunchTask": "BuildSamples"
     }
   ]
 }

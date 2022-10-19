@@ -4,3 +4,4 @@
 
 azure-functions
 azure-data-tables
+azure-search-documents==11.4.0b1

@@ -11,7 +11,7 @@ class JobState:
 @dataclass
 class JobRequest:
     id: str
-    index_config: str
+    index: str
     action: str
 
 @dataclass
@@ -27,7 +27,7 @@ class JobDocument:
 @dataclass
 class Job:
     id: str
-    index_name: str
+    index: str
     state: str
     action: str
     created_on: datetime = None
