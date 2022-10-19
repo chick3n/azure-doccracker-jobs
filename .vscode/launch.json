@@ -7,6 +7,14 @@
       "request": "attach",
       "port": 9091,
       "preLaunchTask": "func: host start"
+    },
+    {
+      "name": "Python: Sample DB",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/samples/sample_db.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
     }
   ]
 }
