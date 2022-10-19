@@ -17,7 +17,7 @@ class Search:
     def get_document_texts(self, documents:List[str], field:str='content') -> List[str]:
         texts = []
         for document_id in documents:
-            document = self.get_document_text(document_id)
+            document = self.get_document(document_id)
             if document and field in document:
                 texts.append(document[field])
 

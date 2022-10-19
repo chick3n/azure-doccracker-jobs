@@ -34,6 +34,15 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "preLaunchTask": "BuildSamples"
+    },
+    {
+      "name": "Python: Sample Extractive Summary",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/samples/sample_ext_summary.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "preLaunchTask": "BuildSamples"
     }
   ]
 }
