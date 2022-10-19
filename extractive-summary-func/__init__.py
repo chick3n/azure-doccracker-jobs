@@ -1,6 +1,7 @@
 import logging
 import json
 import azure.functions as func
+from shared.database import Database
 
 
 def main(msg: func.QueueMessage) -> None:
@@ -19,4 +20,7 @@ def main(msg: func.QueueMessage) -> None:
         'dequeue_count': msg.dequeue_count
     })
 
-    logging.info(result)
+    database = Database()
+    job = database.get_job('ukraine-invasion', '08c008a1-73e1-4e69-ace2-1829dd5aff15')
+
+    logging.info(json.dumps(result))
