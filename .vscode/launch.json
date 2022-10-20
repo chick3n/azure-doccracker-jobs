@@ -43,6 +43,15 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "preLaunchTask": "BuildSamples"
+    },
+    {
+      "name": "Python: Sample Storage",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/samples/sample_storage.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "preLaunchTask": "BuildSamples"
     }
   ]
 }
