@@ -26,6 +26,8 @@ def main() -> None:
     queue.send(error_queue, json.dumps(message, indent=4, default=str))
     print(f'sent message to queue {error_queue}')
 
+    messages = queue.peek('abstractive-summary')
+    print(str(messages))
 
 if __name__ == '__main__':
     main()

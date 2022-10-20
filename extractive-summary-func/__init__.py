@@ -16,7 +16,8 @@ def main(msg: func.QueueMessage) -> None:
         json_request = json.loads(queue_message)
     except Exception as e:
         logging.exception(e)
-        
+        handle_failure(JobRequest(None, None, 'Unknown'), { 'errors': [str(e)], 'original': queue_message })
+        return
 
     job_request = JobRequest(json_request['id'], json_request['index'], json_request['action'])
     if job_request.action != 'ExtractiveSummary':
@@ -57,8 +58,13 @@ def handle_request(job_request: JobRequest) -> None:
     handle_complete(job, summary)
 
 def handle_complete(job: Job, summary: str) -> None:
+    from shared.blobstorage import BlobStorage
+
     database = Database()
     database.update_job_state(job.index, job.id, JobState.Failed)
+
+    storage = BlobStorage()
+    storage.upload(os.environ['Storage_JobContainerName'], f'{job.index}_{job.id}.txt', summary)
 
 def handle_failure(job_request: JobRequest, extra:dict = None) -> None:    
     error_queue = os.environ['Queue_ErrorName']
@@ -68,4 +74,4 @@ def handle_failure(job_request: JobRequest, extra:dict = None) -> None:
     
     queue = Queue()
     queue.create(error_queue)
-    queue.send()
+    queue.send(error_queue, json.dumps(error_request, indent=4, default=str))
