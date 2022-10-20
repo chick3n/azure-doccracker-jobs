@@ -48,7 +48,8 @@ class ExtractiveSummary:
             else:
                 summaries.append(" ".join([sentence.text for sentence in extract_summary_result.sentences]))
         
-        return summaries, errors
+        summary = "".join(summaries)
+        return summary, errors
 
     def __process_texts(self):
         for text in self.texts:

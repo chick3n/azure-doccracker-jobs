@@ -11,7 +11,7 @@ import os
 
 def main(msg: func.QueueMessage) -> None:
     queue_message = msg.get_body().decode('utf-8')
-
+    #queue_message = '{"expirationTime":"2022-10-27T01:47:13.8666328+00:00","id":"8279b244-b2c7-4fe8-8846-0f0aaf71b6f9","index":"km","action":"ExtractiveSummary"}'
     try:
         json_request = json.loads(queue_message)
     except Exception as e:
@@ -37,7 +37,7 @@ def handle_request(job_request: JobRequest) -> None:
         raise Exception('database record PartitionKey: {} RowKey: {} not found.'.format(job_request.index, job_request.id))
 
     job = Job.from_entity(jobEntity)
-    if job.State != JobState.Pending:
+    if job.state != JobState.Pending:
         logging.info('database record PartitionKey: {} RowKey: {} already handled.'.format(job_request.index, job_request.id))
         return
     elif len(job.documents) == 0:
@@ -61,7 +61,7 @@ def handle_complete(job: Job, summary: str) -> None:
     from shared.blobstorage import BlobStorage
 
     database = Database()
-    database.update_job_state(job.index, job.id, JobState.Failed)
+    database.update_job_state(job.index, job.id, JobState.Completed)
 
     storage = BlobStorage()
     storage.upload(os.environ['Storage_JobContainerName'], f'{job.index}_{job.id}.txt', summary)

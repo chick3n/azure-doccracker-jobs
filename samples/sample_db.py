@@ -15,7 +15,7 @@ def main() -> None:
     update_state(database)
 
 def get_sample_entity(database: Database) -> JobEntity:
-    return database.get_job('ukraine-invasion', '08c008a1-73e1-4e69-ace2-1829dd5aff15')
+    return database.get_job('km', '8279b244-b2c7-4fe8-8846-0f0aaf71b6f9')
     
 def get_sample_job(database: Database) -> Job:    
     print('\n\nget_sample_job')

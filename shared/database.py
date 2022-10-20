@@ -45,7 +45,7 @@ class Database:
             if entity is None:
                 logging.info(f'Job Entity {job.PartitionKey}/{job.RowKey} does not exist')
                 return None
-            entity.update(mode=UpdateMode.MERGE, entity=vars(job))
+            table_client.update_entity(mode=UpdateMode.MERGE, entity=vars(job))
             return JobEntity(entity)
     
     def update_job_state(self, p_key, r_key, state) -> Optional[JobEntity]:
